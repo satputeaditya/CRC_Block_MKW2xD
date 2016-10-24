@@ -10,3 +10,6 @@
  https://www.doulos.com/knowhow/vhdl_designers_guide/tips/avoid_synthesizing_unwanted_latches/
  https://www.eeweb.com/electronics-forum/removing-latches-generated-from-missing-assignment-in-if-statement
  http://www.edaboard.com/thread314097.html
+
+  **UPDATE 24 Oct'16** 
+  Mitigated latches by performing certian operations on negative edge.
