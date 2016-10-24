@@ -64,7 +64,7 @@ begin
 end
 
 //*********** Logic for reading registers **************
-always@ (*)  
+ always@ (negedge m.clk)  
 begin
     if (m.rst)     
         m.data_rd = 32'h0000_0000;
@@ -80,7 +80,7 @@ begin
     end
 
 //*********** Logic for Transpose on SEED write (TOT) **************
-always@ (*)                 
+always@ (negedge m.clk)                 
 begin
     if (m.rst == 1)     
         begin
@@ -147,7 +147,7 @@ begin
 end
 
 //*********** Logic for Transpose on DATA write (TOT) **************
-always@ (*)                 
+always@ (negedge m.clk)                 
 begin
     if (m.rst == 1)     
        DATA_T = 32'hFFFF_FFFF;
