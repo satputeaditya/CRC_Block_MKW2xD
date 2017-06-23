@@ -10,11 +10,11 @@
   //----------------------------------------------------------------
   // Register , wire & variable declarations.
   //----------------------------------------------------------------			     
-  reg  	[31:0] 	CRC_DATA;           // reset value = FFFF_FFFF      // register address = 4003_2000 hex
-  reg  	[31:0] 	CRC_GPOLY;          // reset value = 0000_1021      // register address = 4003_2004 hex
-  reg  	[31:0] 	CRC_CTRL;           // reset value = 0000_0000      // register address = 4003_2008 hex
-  reg   [31:0] 	SEED;               // reset value = 0000_0000  STORES SEED VALUE
-  reg   [31:0] 	SEED_T;             // reset value = 0000_0000  STORES TRANSPOSED SEED VALUE    
+  reg  	[31:0] 	CRC_DATA;           // reset value = FFFF_FFFF   register address = 4003_2000 hex
+  reg  	[31:0] 	CRC_GPOLY;          // reset value = 0000_1021   register address = 4003_2004 hex
+  reg  	[31:0] 	CRC_CTRL;           // reset value = 0000_0000   register address = 4003_2008 hex
+  reg   [31:0] 	SEED;               // reset value = 0000_0000 STORES SEED VALUE
+  reg   [31:0] 	SEED_T;             // reset value = 0000_0000 STORES TRANSPOSED SEED VALUE    
   reg  	[31:0] 	DATA;               // reset value = 0000_0000 STORES DATA VALUE
   reg   [31:0] 	DATA_1;             // reset value = 0000_0000 STORES DATA VALUE USED BY CRC ENGINE     
   reg   [31:0] 	DATA_T;             // reset value = 0000_0000 STORES TRANSPOSED DATA VALUE                                                                            
