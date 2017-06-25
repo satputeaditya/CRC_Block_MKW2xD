@@ -17,7 +17,7 @@
   reg   [31:0] 	SEED_T;             // reset value = 0000_0000 STORES TRANSPOSED SEED VALUE    
   reg  	[31:0] 	DATA;               // reset value = 0000_0000 STORES DATA VALUE
   reg   [31:0] 	DATA_1;             // reset value = 0000_0000 STORES DATA VALUE USED BY CRC ENGINE     
-  reg   [31:0] 	DATA_T;             // reset value = 0000_0000 STORES TRANSPOSED DATA VALUE                                                                            
+  reg   [31:0] 	DATA_T;             // reset value = 0000_0000 STORES TRANSPOSED DATA VALUE  
   reg   [31:0] 	CRC;                // reset value = 0000_0000 STORES SEED VALUE USED BY CRC ENGINE
   reg   [31:0] 	CRC_out;            // reset value = 0000_0000 STORES A COPY OF FINAL CRC VALUE RESULT
   reg   [31:0] 	CRC_N;              // reset value = 0000_0000 STORES INVERTED CRC VALUE (FROM RESULT OF CRC ENGINE)
@@ -212,23 +212,19 @@
             begin
                 CRC = SEED;               // copying once before computation, doing this to avoid multiple drivers issue during synthesis
                 DATA_1 = DATA;            // copying once before computation, doing this to avoid multiple drivers issue during synthesis                
-                $display ("CRC = %h", CRC);
             if (m.addr == 32'h4003_2000 && m.Sel == 1 && m.RW == 1 && WAS == 0 && TCRC == 1)   // WAS is 0 & DATA is written and 32 bit CRC mode
                                     begin
                                         for(i=0; i<=31; i = i+1)
                                         begin
                                                     if (CRC[31]) begin  
-                                                                        $display ("CRC[31] = 1 and TCRC  = 1 iteration = %d, CRC = %h, DATA = %h , CRC_GPOLY = %h", i, CRC, DATA , CRC_GPOLY);
                                                                         CRC = ({CRC[30:0],DATA_1[31-i]})^CRC_GPOLY;
                                                                         CRC_out = CRC;
                                                                  end                                                                 
-                                                    else        begin
+                                                    else         begin
                                                                         CRC = {CRC[30:0],DATA_1[31-i]};
-                                                                        $display ("CRC[31] = 0 and TCRC  = 1 iteration = %d, CRC = %h, DATA = %h , CRC_GPOLY = %h", i, CRC, DATA , CRC_GPOLY);                                                    
-                                                                        CRC_out = CRC;                                                                        
-                                                                end
+																		CRC_out = CRC;
+																 end
                                         end
-                                                                        $display ("CRC value  = %h ", CRC);
                                     end
 
             else if (m.addr == 32'h4003_2000 && m.Sel == 1 && m.RW == 1 && WAS == 0 && TCRC == 0)   // WAS is 0 & DATA is written and 16 bit CRC mode
@@ -236,18 +232,15 @@
                                         for(i=0; i<=31; i = i+1)
                                         begin
                                                     if (CRC[15]) begin  
-                                                                        $display ("CRC[16] = 1 and TCRC  = 0 iteration = %d, CRC = %h, DATA = %h , CRC_GPOLY = %h", i, CRC, DATA , CRC_GPOLY);
                                                                         CRC = ({CRC[14:0],DATA_1[31-i]})^CRC_GPOLY[15:0];
                                                                         CRC_out = CRC;                                                                        
                                                                  end
                                                                  
                                                     else        begin
                                                                         CRC = {CRC[14:0],DATA_1[31-i]};
-                                                                        $display ("CRC[31] = 0 and TCRC  = 0 iteration = %d, CRC = %h, DATA = %h , CRC_GPOLY = %h", i, CRC, DATA , CRC_GPOLY);                                                    
-                                                                        CRC_out = CRC;                                                                        
-                                                                end
+																		CRC_out = CRC;
+																end
                                         end
-                                                                        $display ("CRC value  = %h ", CRC);
                                     end
                                    
             end                
